@@ -23,7 +23,7 @@ from restaurant import views
 urlpatterns = [
     # url(r'^$', views.home, name='home'),
     path('', views.home, name='home'),
-    # path('menus/<int:pk>/', views.menus_produit, name='menus_produit'),
+    path('menus/<int:pk>/', views.menus_produit, name='menus_produit'),
     # path('menus/<int:pk>/new/', views.new_produit, name='new_produit'),
     path('admin/', admin.site.urls),
 ]
