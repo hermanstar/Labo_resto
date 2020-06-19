@@ -61,6 +61,13 @@
             <a href="#" class="list-group-item">{{ menu.nom }}</a>
           {% endfor %}
 
+      <h1 class="my-4">Menu </h1>
+      <div class="list-group">
+        {% for menu in menus %}
+          <a class="list-group-item" href="{% url 'restaurant:menus_produit' menu.slug %}">{{ menu.nom }}</a>
+        {% endfor %}
+      </div>
+
         </div>
 
       </div>
