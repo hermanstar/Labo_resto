@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User 
-
+from django.utils.text import slugify
 
 # Create your models here.
 
@@ -8,6 +8,12 @@ from django.contrib.auth.models import User
 class Menu(models.Model):
     nom         = models.CharField(max_length=30, unique=True)
     description = models.CharField(max_length=100)
+    slug        = models.SlugField(blank=True, null=True)
+    
+    def save(self, *args, **kwargs):
+        if not self.slug and self.nom : 
+            self.slug = slugify(self.nom)
+        super(Menu, self).save(*args, **kwargs)    
     
     def __str__(self):
         return self.nom

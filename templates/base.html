@@ -10,6 +10,7 @@
 
   <title>{% block title %}Bienvenue {% endblock %} </title>
 
+
   <!-- Bootstrap core CSS -->
   <link href="{% static 'bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
 
@@ -30,7 +31,8 @@
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item active">
-            <a class="nav-link" href="{% url 'home' %}">Accueil
+            
+            <a class="nav-link" href="{% url 'restaurant:home' %}">Accueil
               <span class="sr-only">(current)</span>
             </a>
           </li>
@@ -55,8 +57,6 @@
     {% endblock %}
   </div>
   <!-- /.container -->
-
-
 
   <!-- Footer -->
   <footer class="py-5 bg-dark">
