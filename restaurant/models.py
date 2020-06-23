@@ -54,7 +54,7 @@ class Commande(models.Model):
     composition = models.TextField(max_length=1000) 
     total       = models.DecimalField(max_digits=5, decimal_places=2)
     date        = models.DateTimeField(auto_now_add=True)
-    table    = models.ForeignKey(Table, on_delete=models.CASCADE, related_name='commandes')
+    table       = models.ForeignKey(Table, on_delete=models.CASCADE, related_name='commandes')
     serveur     = models.ForeignKey(Serveur, on_delete=models.CASCADE, related_name='commandes')
 
 

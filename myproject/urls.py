@@ -19,7 +19,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 
-#from restaurant import views
+from restaurant import views
 
 urlpatterns = [
     # url(r'^$', views.home, name='home'),
@@ -31,6 +31,7 @@ urlpatterns = [
     #path('', views.home, name='home'),
     #path('menus/<int:pk>/', views.menus_produit, name='menus_produit'),
     path('menus/' , include('restaurant.urls' , namespace='home')),
+    path('commandes/', views.resumer_commande, name='resumer_commande'),
     path('admin/', admin.site.urls),
     
 ]
