@@ -1,9 +1,90 @@
-<!DOCTYPE html>
-{% load static %}
-{% load qr_code %}
+{% load static %}<!DOCTYPE html>
+<html lang="fr">
 
+<head>
 
-<h1>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
 
+  <title>{% block title %}Bienvenue {% endblock %} </title>
+  
+  <!-- Bootstrap core CSS -->
+  <link href="{% static 'bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 
-</h1>
+  <!-- Custom styles for this template -->
+  <link href="{% static 'css/commande_style.css' %}" rel="stylesheet">
+  
+  <!-- other Custom styles for this template -->
+  <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
+</head>
+
+<body>
+	<div class="card">
+		<div class="row">
+			<div class="col-md-8 cart">
+				<div class="title">
+					<div class="row">
+						<div class="col">
+							<h4><b>Votre sélection</b></h4>
+						</div>
+						<div class="col align-self-center text-right text-muted">Nombre de produit: {{nombre_produits}}</div>
+					</div>
+				</div>
+				{% for choix in commande.composition.all %}
+					<div class="row border-top border-bottom">
+						<div class="row main align-items-center">
+							<div class="col-2"><img class="img-fluid" src="{{choix.choix.photo.url}}"></div>
+							<div class="col">
+								<div class="row text-muted">{{ choix.choix.nom }}</div>
+								<div class="row">{{ choix.choix.description }}</div>
+							</div>
+							<div class="col">                            
+                                <a href="{% url 'diminuerProduit' commande.nr_commande choix.choix.slug %}">-</a> 
+								<a href="#" class="border">{{ choix.quantite }}</a>
+								<a href="{% url 'ajouterProduit' commande.nr_commande choix.choix.slug %}">+</a>                        
+                            </div>
+							<div class="col">
+								&euro; {{ choix.get_total}} 
+								<a href = "{% url 'retirerProduit' commande.nr_commande choix.choix.slug %}">
+									<span class="close" >&#10005;</span>
+								</a>
+							</div>
+						</div>
+					</div>
+			    {% endfor %}
+				<div class="back-to-shop"><a href="{% url 'restaurant:home' %}">&leftarrow;</a><span class="text-muted">Menus</span></div>
+			</div>
+			<div class="col-md-4 summary">
+				<div>
+					<h5><b>Résumé</b></h5>
+				</div>
+				<hr>
+				<div class="row">
+					<div class="col" style="padding-left:0;">Nombre de produit: {{nombre_produits}}</div>
+					<div class="col text-right">&euro; {{ commande.get_totals }}</div>
+				</div>
+				<form>
+					<p>LIVRAISONS</p> <select>
+						<option class="text-muted">LIVRAISONS STANDARD</option> &euro;5.00</option>
+					</select>
+					<p>VOTRE CODE</p> <input id="code" placeholder="Enter your code">
+				</form>
+				<div class="row" style="border-top: 1px solid rgba(0,0,0,.1); padding: 2vh 0;">
+					<div class="col">PRIX TOTAL</div>
+					<div class="col text-right">&euro; {{ commande.get_totals }}</div>
+				</div> <button class="btn">COMMANDER</button>
+			</div>
+		</div>
+	</div>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="{% static 'jquery/jquery.min.js' %}" ></script>
+  <script src="{% static 'bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'js/main.js' %}"></script>
+</body>
+
+</html>
+ 
