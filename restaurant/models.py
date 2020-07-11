@@ -58,7 +58,3 @@ class Commande(models.Model):
     serveur     = models.ForeignKey(Serveur, on_delete=models.CASCADE, related_name='commandes')
 
 
-class Details(models.Model):
-    table    = models.ForeignKey(Table, on_delete=models.CASCADE, related_name='details')
-    produit  = models.ForeignKey(Produit, on_delete=models.CASCADE, related_name='details')
-    quantite = models.IntegerField()
