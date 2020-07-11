@@ -22,21 +22,14 @@ from django.conf.urls.static import static
 from restaurant import views
 
 urlpatterns = [
-    # url(r'^$', views.home, name='home'),
-    # path('', views.home, name='home'),
-    # path('menus/<int:pk>/', views.menus_produit, name='menus_produit'),
-    #path('', views.home, name='home'),
-    #path('menus/<int:pk>/', views.menus_produit, name='menus_produit'),
-    # path('menus/<int:pk>/new/', views.new_produit, name='new_produit'),
-    #path('', views.home, name='home'),
-    #path('menus/<int:pk>/', views.menus_produit, name='menus_produit'),
+
     path('menus/' , include('restaurant.urls' , namespace='home')),
-    path('commandes/', views.resumer_commande, name='resumer_commande'),
+    path('commandes/<int:pk>/', views.resumerCommande, name='resumerCommande'),
     path('admin/', admin.site.urls),
-    
+    path('commandes/ajouter/<str:nr_commande>/<slug:slug>/',views.ajouterProduit,name='ajouterProduit'),
+    path('commandes/diminuer/<str:nr_commande>/<slug:slug>/',views.diminuerProduit,name='diminuerProduit'),
+    path('commandes/retirer/<str:nr_commande>/<slug:slug>/',views.retirerProduit,name='retirerProduit')
 ]
-
-
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
